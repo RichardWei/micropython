@@ -282,8 +282,11 @@ int eth_init(eth_t *self, int mac_idx, uint32_t phy_addr, int phy_type) {
     mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_RXD2, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_RXD2));
     mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_RXD3, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_RXD3));
     mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_RX_CTL, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_RX_CTL));
+    // mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_CRS, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_CRS));
+    // mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_COL, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_COL));
     #endif
 
+#endif
     // Enable peripheral clock
     #if defined(STM32H5)
     __HAL_RCC_ETH_CLK_ENABLE();
@@ -353,7 +356,11 @@ static int eth_mac_init(eth_t *self) {
     #endif
     #else
     __HAL_RCC_SYSCFG_CLK_ENABLE();
+#if MICROPY_HW_ETH_PHY_RMII
     SYSCFG->PMC |= SYSCFG_PMC_MII_RMII_SEL;
+#elif MICROPY_HW_ETH_PHY_MII
+    SYSCFG->PMC &= ~SYSCFG_PMC_MII_RMII_SEL;
+#endif
     #endif
 
     #if defined(STM32H5)
