@@ -359,7 +359,8 @@ static int eth_mac_init(eth_t *self) {
 #if MICROPY_HW_ETH_PHY_RMII
     SYSCFG->PMC |= SYSCFG_PMC_MII_RMII_SEL;
 #elif MICROPY_HW_ETH_PHY_MII
-    SYSCFG->PMC &= ~SYSCFG_PMC_MII_RMII_SEL;
+    SYSCFG->PMC &= ~(SYSCFG_PMC_MII_RMII_SEL);
+    SYSCFG->PMC |= (uint32_t)(ETH_MEDIA_INTERFACE_MII);
 #endif
     #endif
 
