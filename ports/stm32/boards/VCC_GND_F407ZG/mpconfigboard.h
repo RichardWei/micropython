@@ -25,7 +25,7 @@
 #define MICROPY_HW_ENABLE_SDCARD    (1)
 
 // HSE is 25MHz
-#define MICROPY_HW_CLK_PLLM (25)            // divide external clock by this to get 1MHz
+#define MICROPY_HW_CLK_PLLM (8)            // divide external clock by this to get 1MHz
 #define MICROPY_HW_CLK_PLLN (336)           // PLL clock in MHz
 #define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2) // divide PLL clock by this to get core clock
 #define MICROPY_HW_CLK_PLLQ (7)             // divide core clock by this to get 48MHz
@@ -166,7 +166,7 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_USB_FS (1)
 // #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 // #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
-
+#define MICROPY_HW_RTH_PHY_RMII (1)
 // Ethernet via RMII
 #define MICROPY_HW_ETH_MDC          (pin_C1)
 #define MICROPY_HW_ETH_MDIO         (pin_A2)

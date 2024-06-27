@@ -206,7 +206,7 @@ extern struct _spi_bdev_t spi_bdev;
 
 // USB config
 #define MICROPY_HW_USB_FS (1)
-#define MICROPY_HW_RTH_PHY_RMII (1)
+#define MICROPY_HW_RTH_PHY_MII (1)
 // #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 // #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
 
@@ -214,18 +214,7 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_ETH_MDC          (pin_C1)
 #define MICROPY_HW_ETH_MDIO         (pin_A2)
 
-#if MICROPY_HW_ETH_PHY_RMII
-
-#define MICROPY_HW_ETH_RMII_REF_CLK (pin_A1)
-#define MICROPY_HW_ETH_RMII_CRS_DV  (pin_A7)
-#define MICROPY_HW_ETH_RMII_RXD0    (pin_C4)
-#define MICROPY_HW_ETH_RMII_RXD1    (pin_C5)
-#define MICROPY_HW_ETH_RMII_TX_EN   (pin_B11)
-#define MICROPY_HW_ETH_RMII_TXD0    (pin_B12)
-#define MICROPY_HW_ETH_RMII_TXD1    (pin_B13)
-
-#elif MICROPY_HW_ETH_PHY_MII
-
+#if MICROPY_HW_ETH_PHY_MII
 #define MICROPY_HW_ETH_MII_TX_CLK    (pin_C3)
 #define MICROPY_HW_ETH_MII_TX_EN     (pin_B11)
 #define MICROPY_HW_ETH_MII_TXD0      (pin_B12)
@@ -241,6 +230,15 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_ETH_MII_RX_ER     (pin_B10)
 #define MICROPY_HW_ETH_MII_CRS       (pin_A0)
 #define MICROPY_HW_ETH_MII_COL       (pin_A3)
+#else
+
+#define MICROPY_HW_ETH_RMII_REF_CLK (pin_A1)
+#define MICROPY_HW_ETH_RMII_CRS_DV  (pin_A7)
+#define MICROPY_HW_ETH_RMII_RXD0    (pin_C4)
+#define MICROPY_HW_ETH_RMII_RXD1    (pin_C5)
+#define MICROPY_HW_ETH_RMII_TX_EN   (pin_B11)
+#define MICROPY_HW_ETH_RMII_TXD0    (pin_B12)
+#define MICROPY_HW_ETH_RMII_TXD1    (pin_B13)
 
 
 

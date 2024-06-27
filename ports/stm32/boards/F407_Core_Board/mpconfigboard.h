@@ -47,47 +47,47 @@
 #define MICROPY_HW_UART1_RTS    (pin_A12)
 #define MICROPY_HW_UART1_CTS    (pin_A11)
 // USART1_CK  PA8
-#define MICROPY_HW_UART_REPL        PYB_UART_1
-#define MICROPY_HW_UART_REPL_BAUD   115200
+// #define MICROPY_HW_UART_REPL        PYB_UART_1
+// #define MICROPY_HW_UART_REPL_BAUD   115200
 // USART2
-#define MICROPY_HW_UART2_TX     (pin_A2)  // PA2,PD5
-#define MICROPY_HW_UART2_RX     (pin_A3)  // PA3,PD6
-#define MICROPY_HW_UART2_RTS    (pin_A1)  // PA1,PD4
-#define MICROPY_HW_UART2_CTS    (pin_A0)  // PA0,PD3
+// #define MICROPY_HW_UART2_TX     (pin_A2)  // PA2,PD5
+// #define MICROPY_HW_UART2_RX     (pin_A3)  // PA3,PD6
+// #define MICROPY_HW_UART2_RTS    (pin_A1)  // PA1,PD4
+// #define MICROPY_HW_UART2_CTS    (pin_A0)  // PA0,PD3
 // USART2_CK  PA4,PD7
 
 // USART3
-#define MICROPY_HW_UART3_TX     (pin_D8)  // PB10,PC10,PD8
-#define MICROPY_HW_UART3_RX     (pin_D9)  // PB11,PC11,PD9
-#define MICROPY_HW_UART3_RTS    (pin_D12) // PB14,PD12
-#define MICROPY_HW_UART3_CTS    (pin_D11) // PB13,PD11
+// #define MICROPY_HW_UART3_TX     (pin_D8)  // PB10,PC10,PD8
+// #define MICROPY_HW_UART3_RX     (pin_D9)  // PB11,PC11,PD9
+// #define MICROPY_HW_UART3_RTS    (pin_D12) // PB14,PD12
+// #define MICROPY_HW_UART3_CTS    (pin_D11) // PB13,PD11
 // USART3_CK  PB12,PC12,PD10
 
-// UART4
-#define MICROPY_HW_UART4_TX     (pin_A0)  // PA0,PC10
-#define MICROPY_HW_UART4_RX     (pin_A1)  // PA1,PC11
+// // UART4
+// #define MICROPY_HW_UART4_TX     (pin_A0)  // PA0,PC10
+// #define MICROPY_HW_UART4_RX     (pin_A1)  // PA1,PC11
 
-// UART5
-#define MICROPY_HW_UART5_TX     (pin_C12) // PC12
-#define MICROPY_HW_UART5_RX     (pin_D2)  // PD2
+// // UART5
+// #define MICROPY_HW_UART5_TX     (pin_C12) // PC12
+// #define MICROPY_HW_UART5_RX     (pin_D2)  // PD2
 
-// USART6
-#define MICROPY_HW_UART6_TX     (pin_C6)  // PC6,PG14
-#define MICROPY_HW_UART6_RX     (pin_C7)  // PC7,PG9
-#define MICROPY_HW_UART6_RTS    (pin_G8)  // PG8,PG12
-#define MICROPY_HW_UART6_CTS    (pin_G13) // PG13,PG15
+// // USART6
+// #define MICROPY_HW_UART6_TX     (pin_C6)  // PC6,PG14
+// #define MICROPY_HW_UART6_RX     (pin_C7)  // PC7,PG9
+// #define MICROPY_HW_UART6_RTS    (pin_G8)  // PG8,PG12
+// #define MICROPY_HW_UART6_CTS    (pin_G13) // PG13,PG15
 // USART6_CK  PC8,PG7
 
-// I2C buses
-#define MICROPY_HW_I2C1_SCL     (pin_B6)  // PB8,PB6
-#define MICROPY_HW_I2C1_SDA     (pin_B7)  // PB9,PB7
-// I2C1_SMBA  PB5
-#define MICROPY_HW_I2C2_SCL     (pin_B10) // PB10,PF1
-#define MICROPY_HW_I2C2_SDA     (pin_B11) // PB11,PF0
-// I2C2_SMBA  PB12,PF2
-#define MICROPY_HW_I2C3_SCL     (pin_A8)  // PA8
-#define MICROPY_HW_I2C3_SDA     (pin_C9)  // PC9
-// I2C3_SMBA  PA9
+// // I2C buses
+// #define MICROPY_HW_I2C1_SCL     (pin_B6)  // PB8,PB6
+// #define MICROPY_HW_I2C1_SDA     (pin_B7)  // PB9,PB7
+// // I2C1_SMBA  PB5
+// #define MICROPY_HW_I2C2_SCL     (pin_B10) // PB10,PF1
+// #define MICROPY_HW_I2C2_SDA     (pin_B11) // PB11,PF0
+// // I2C2_SMBA  PB12,PF2
+// #define MICROPY_HW_I2C3_SCL     (pin_A8)  // PA8
+// #define MICROPY_HW_I2C3_SDA     (pin_C9)  // PC9
+// // I2C3_SMBA  PA9
 
 // AT24C08 EEPROM on I2C1 0x50-0x53
 
@@ -107,10 +107,10 @@
 #define MICROPY_HW_SPI1_MISO    (pin_B4)  // PA6,PB4
 #define MICROPY_HW_SPI1_MOSI    (pin_B5)  // PA7,PB5
 
-#define MICROPY_HW_SPI2_NSS     (pin_B12) // PB12,PB9
-#define MICROPY_HW_SPI2_SCK     (pin_B13) // PB13,PB10
-#define MICROPY_HW_SPI2_MISO    (pin_B14) // PB14,PC2
-#define MICROPY_HW_SPI2_MOSI    (pin_B15) // PB15,PC3
+// #define MICROPY_HW_SPI2_NSS     (pin_B12) // PB12,PB9
+// #define MICROPY_HW_SPI2_SCK     (pin_B13) // PB13,PB10
+// #define MICROPY_HW_SPI2_MISO    (pin_B14) // PB14,PC2
+// #define MICROPY_HW_SPI2_MOSI    (pin_B15) // PB15,PC3
 
 // #define MICROPY_HW_SPI3_NSS     (pin_A15) // PA15,PA4
 // #define MICROPY_HW_SPI3_SCK     (pin_B3)  // PB3,PC10
@@ -118,10 +118,10 @@
 // #define MICROPY_HW_SPI3_MOSI    (pin_B5)  // PB5,PC12
 
 // CAN buses
-#define MICROPY_HW_CAN1_TX      (pin_B9)  // PB9,PD1,PA12
-#define MICROPY_HW_CAN1_RX      (pin_B8)  // PB8,PD0,PA11
-#define MICROPY_HW_CAN2_TX      (pin_B13) // PB13,PB6
-#define MICROPY_HW_CAN2_RX      (pin_B12) // PB12,PB5
+// #define MICROPY_HW_CAN1_TX      (pin_B9)  // PB9,PD1,PA12
+// #define MICROPY_HW_CAN1_RX      (pin_B8)  // PB8,PD0,PA11
+// #define MICROPY_HW_CAN2_TX      (pin_B13) // PB13,PB6
+// #define MICROPY_HW_CAN2_RX      (pin_B12) // PB12,PB5
 
 // DAC
 // DAC_OUT1 PA4
@@ -176,7 +176,7 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_USB_FS (1)
 // #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 // #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
-
+#define MICROPY_HW_RTH_PHY_RMII (1)
 // Ethernet via RMII
 #define MICROPY_HW_ETH_MDC          (pin_C1)
 #define MICROPY_HW_ETH_MDIO         (pin_A2)
