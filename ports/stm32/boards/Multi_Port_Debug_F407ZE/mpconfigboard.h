@@ -38,7 +38,7 @@
 #define MICROPY_PY_FRAMEBUF         (0)
 // // #define MICROPY_PY_SOCKET           (0)
 // // #define MICROPY_PY_NETWORK          (0)
-#define MICROPY_PY_ONEWIRE          (0)
+// #define MICROPY_PY_ONEWIRE          (0)
 // #define MICROPY_PY_STM              (0)
 // #define MICROPY_PY_PYB_LEGACY       (0)
 // // #define MICROPY_PY_HEAPQ            (0)
