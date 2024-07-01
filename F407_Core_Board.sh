@@ -1,23 +1,19 @@
 #!/bin/bash
-
-
 # chmod +x py_env.sh
-
+BOARD=F407_Core_Board 
 make -C mpy-cross
-
-
 cd ports/stm32
 
-BOARD=F407_Core_Board 
+rm -rf build-${BOARD}
 
 
-# make BOARD=$BOARD  submodules
-
-# make BOARD=$BOARD  MICROPY_PY_NETWORK_WIZNET5K=5500
 
 
-# rm -rf build-F407_Core_Board
+# make BOARD=${BOARD} LTO=1 
 
-# make BOARD=$BOARD  submodules
-make BOARD=$BOARD  LTO=1
-cp build-F407_Core_Board/firmware.hex boards/F407_Core_Board/
+make BOARD=${BOARD} LTO=1
+FIRMWARE_DIR=boards/${BOARD}
+mkdir -p ${FIRMWARE_DIR}
+cp build-${BOARD}/firmware.hex ${FIRMWARE_DIR}
+# cp build-${BOARD}/firmware0.bin ${FIRMWARE_DIR}
+# cp build-${BOARD}/firmware1.bin ${FIRMWARE_DIR}
