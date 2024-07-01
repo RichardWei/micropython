@@ -356,11 +356,11 @@ static int eth_mac_init(eth_t *self) {
     #endif
     #else
     __HAL_RCC_SYSCFG_CLK_ENABLE();
-#if MICROPY_HW_ETH_PHY_RMII
-    SYSCFG->PMC |= SYSCFG_PMC_MII_RMII_SEL;
-#elif MICROPY_HW_ETH_PHY_MII
+#if MICROPY_HW_ETH_PHY_MII
     SYSCFG->PMC &= ~(SYSCFG_PMC_MII_RMII_SEL);
     SYSCFG->PMC |= (uint32_t)(ETH_MEDIA_INTERFACE_MII);
+#else
+    SYSCFG->PMC |= SYSCFG_PMC_MII_RMII_SEL;
 #endif
     #endif
 
