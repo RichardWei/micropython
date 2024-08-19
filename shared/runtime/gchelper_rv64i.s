@@ -1,11 +1,9 @@
 /*
  * This file is part of the MicroPython project, http://micropython.org/
  *
- * Development of the code in this file was sponsored by Microbric Pty Ltd
- *
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 Damien P. George
+ * Copyright (c) 2024 Alessandro Gatti
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,27 +23,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef MICROPY_INCLUDED_ESP32_UART_H
-#define MICROPY_INCLUDED_ESP32_UART_H
 
-// Whether to enable the REPL on a UART.
-#ifndef MICROPY_HW_ENABLE_UART_REPL
-#define MICROPY_HW_ENABLE_UART_REPL (!CONFIG_USB_OTG_SUPPORTED && !CONFIG_ESP_CONSOLE_USB_CDC && !CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG_ENABLED)
-#endif
+    .global gc_helper_get_regs_and_sp
+    .type   gc_helper_get_regs_and_sp, @function
 
-#if MICROPY_HW_ENABLE_UART_REPL
+gc_helper_get_regs_and_sp:
 
-#ifndef MICROPY_HW_UART_REPL
-#define MICROPY_HW_UART_REPL (0)
-#endif
+    /* Store registers into the given array. */
 
-#ifndef MICROPY_HW_UART_REPL_BAUD
-#define MICROPY_HW_UART_REPL_BAUD (115200)
-#endif
+    sw    x8,  0(x10)  /* Save S0.  */
+    sw    x9,  8(x10)  /* Save S1.  */
+    sw   x18, 16(x10)  /* Save S2.  */
+    sw   x19, 24(x10)  /* Save S3.  */
+    sw   x20, 32(x10)  /* Save S4.  */
+    sw   x21, 40(x10)  /* Save S5.  */
+    sw   x22, 48(x10)  /* Save S6.  */
+    sw   x23, 56(x10)  /* Save S7.  */
+    sw   x24, 64(x10)  /* Save S8.  */
+    sw   x25, 72(x10)  /* Save S9.  */
+    sw   x26, 80(x10)  /* Save S10. */
+    sw   x27, 88(x10)  /* Save S11. */
 
-void uart_stdout_init(void);
-int uart_stdout_tx_strn(const char *str, size_t len);
+    /* Return the stack pointer. */
 
-#endif // MICROPY_HW_ENABLE_UART_REPL
+    add  x10, x0, x2
+    jalr  x0, x1, 0
 
-#endif // MICROPY_INCLUDED_ESP32_UART_H
+    .size gc_helper_get_regs_and_sp, .-gc_helper_get_regs_and_sp
