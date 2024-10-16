@@ -35,7 +35,16 @@
 #include "mpconfigboard.h"
 
 // Board and hardware specific configuration
+#if PICO_RP2040
 #define MICROPY_HW_MCU_NAME                     "RP2040"
+#elif PICO_RP2350 && PICO_ARM
+#define MICROPY_HW_MCU_NAME                     "RP2350"
+#elif PICO_RP2350 && PICO_RISCV
+#define MICROPY_HW_MCU_NAME                     "RP2350-RISCV"
+#else
+#error Unknown MCU
+#endif
+
 #ifndef MICROPY_HW_ENABLE_UART_REPL
 #define MICROPY_HW_ENABLE_UART_REPL             (0) // useful if there is no USB
 #endif
@@ -69,10 +78,16 @@
 
 // MicroPython emitters
 #define MICROPY_PERSISTENT_CODE_LOAD            (1)
+#if PICO_ARM
 #define MICROPY_EMIT_THUMB                      (1)
-#define MICROPY_EMIT_THUMB_ARMV7M               (0)
 #define MICROPY_EMIT_INLINE_THUMB               (1)
+#if PICO_RP2040
+#define MICROPY_EMIT_THUMB_ARMV7M               (0)
 #define MICROPY_EMIT_INLINE_THUMB_FLOAT         (0)
+#endif
+#elif PICO_RISCV
+#define MICROPY_EMIT_RV32                       (1)
+#endif
 
 // Optimisations
 #define MICROPY_OPT_COMPUTED_GOTO               (1)
@@ -146,13 +161,16 @@
 #define MICROPY_PY_MACHINE_UART                 (1)
 #define MICROPY_PY_MACHINE_UART_INCLUDEFILE     "ports/rp2/machine_uart.c"
 #define MICROPY_PY_MACHINE_UART_SENDBREAK       (1)
+#define MICROPY_PY_MACHINE_UART_IRQ             (1)
 #define MICROPY_PY_MACHINE_WDT                  (1)
 #define MICROPY_PY_MACHINE_WDT_INCLUDEFILE      "ports/rp2/machine_wdt.c"
+#define MICROPY_PY_MACHINE_FREQ_NUM_ARGS_MAX    (2)
 #define MICROPY_PY_ONEWIRE                      (1)
 #define MICROPY_VFS                             (1)
 #define MICROPY_VFS_LFS2                        (1)
 #define MICROPY_VFS_FAT                         (1)
 #define MICROPY_SSL_MBEDTLS                     (1)
+#define MICROPY_PY_LWIP_PPP                     (MICROPY_PY_NETWORK_PPP_LWIP)
 #define MICROPY_PY_LWIP_SOCK_RAW                (MICROPY_PY_LWIP)
 
 // Hardware timer alarm index. Available range 0-3.
@@ -279,4 +297,20 @@ extern void lwip_lock_release(void);
 // Bluetooth code only runs in the scheduler, no locking/mutex required.
 #define MICROPY_PY_BLUETOOTH_ENTER uint32_t atomic_state = 0;
 #define MICROPY_PY_BLUETOOTH_EXIT (void)atomic_state;
+#endif
+
+#ifndef MICROPY_BOARD_STARTUP
+#define MICROPY_BOARD_STARTUP()
+#endif
+
+#ifndef MICROPY_BOARD_EARLY_INIT
+#define MICROPY_BOARD_EARLY_INIT()
+#endif
+
+#ifndef MICROPY_BOARD_START_SOFT_RESET
+#define MICROPY_BOARD_START_SOFT_RESET()
+#endif
+
+#ifndef MICROPY_BOARD_END_SOFT_RESET
+#define MICROPY_BOARD_END_SOFT_RESET()
 #endif
