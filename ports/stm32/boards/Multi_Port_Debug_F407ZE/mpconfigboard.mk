@@ -24,7 +24,7 @@ MICROPY_PY_SSL = 1
 MICROPY_SSL_MBEDTLS = 1
 
 # CFLAGS += -Os -s
-
+MICROPY_HW_ENABLE_ISR_UART_FLASH_FUNCS_IN_RAM = 1
 
 # Provide different variants for the downloads page.
 ifeq ($(BOARD_VARIANT),DP)
