@@ -459,6 +459,33 @@ typedef struct {
         .single_status_byte = true, \
 }
 
+
+
+
+// Settings for the Puya P25Q32 4MiB SPI flash.
+// Datasheet: https://www.puya.com.cn/
+// Note: Adjust parameters based on datasheet details for P25Q32.
+#define P25Q32 { \
+        .total_size = (1 << 22), /* 4 MiB */ \
+        .start_up_time_us = 3000, /* Startup time, adjust based on datasheet */ \
+        .manufacturer_id = 0x85, /* Manufacturer ID for Puya */ \
+        .memory_type = 0x60, /* Memory type for P25Q32 */ \
+        .capacity = 0x16, /* Capacity byte for 4 MiB */ \
+        .max_clock_speed_mhz = 120, /* Maximum clock speed */ \
+        .quad_enable_bit_mask = 0x02, /* Bit mask to enable Quad mode */ \
+        .has_sector_protection = false, /* Adjust based on sector protection support */ \
+        .supports_fast_read = true, /* Fast read supported */ \
+        .supports_qspi = true, /* Quad SPI supported */ \
+        .supports_qspi_writes = true, /* Quad SPI writes supported */ \
+        .write_status_register_split = true, /* Status register is split */ \
+        .single_status_byte = false, /* Not a single status byte */ \
+}
+
+
+
+
+
+
 // Settings for a GENERIC device with the most common setting
 #define GENERIC { \
         .total_size = (1 << 21), /* 2 MiB */ \
