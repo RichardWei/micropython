@@ -114,13 +114,13 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_CAN2_TX (pin_B13)
 #define MICROPY_HW_CAN2_RX (pin_B12)
 
-// I2C1 config (MicroMod I2C1)
-#define MICROPY_HW_I2C1_NAME "I2C1"
-#define MICROPY_HW_I2C1_SCL (pin_B6)
-#define MICROPY_HW_I2C1_SDA (pin_B7)
+// // I2C1 config (MicroMod I2C1)
+// #define MICROPY_HW_I2C1_NAME "I2C1"
+// #define MICROPY_HW_I2C1_SCL (pin_B6)
+// #define MICROPY_HW_I2C1_SDA (pin_B7)
 
 // I2C2 config (MicroMod I2C)
-#define MICROPY_HW_I2C3_NAME "I2C"
+#define MICROPY_HW_I2C3_NAME "I2C3"
 #define MICROPY_HW_I2C3_SCL (pin_A8)
 #define MICROPY_HW_I2C3_SDA (pin_C9)
 
