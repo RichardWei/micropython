@@ -286,7 +286,7 @@ int eth_init(eth_t *self, int mac_idx, uint32_t phy_addr, int phy_type) {
     // mp_hal_pin_config_alt_static(MICROPY_HW_ETH_RGMII_COL, MP_HAL_PIN_MODE_ALT, MP_HAL_PIN_PULL_NONE, STATIC_AF_ETH(RGMII_COL));
     #endif
 
-#endif
+
     // Enable peripheral clock
     #if defined(STM32H5)
     __HAL_RCC_ETH_CLK_ENABLE();
