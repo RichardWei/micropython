@@ -306,6 +306,7 @@ SRC_C += \
 	storage.c \
 	sdcard.c \
 	sdram.c \
+	sram.c \
 	vfs_rom_ioctl.c \
 	fatfs_port.c \
 	lcd.c \
