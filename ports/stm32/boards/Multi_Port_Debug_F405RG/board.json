@@ -5,10 +5,10 @@
     "docs": "",
     "features": [],
     "images": [
-        "STM32F407ZGT6.jpg"
+        "STM32F405RGT6.jpg"
     ],
     "mcu": "stm32f4",
-    "product": "F407ZE",
+    "product": "F405RG",
     "thumbnail": "",
     "url": "http://vcc-gnd.com/",
     "vendor": "Jerry"

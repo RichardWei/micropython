@@ -9,9 +9,9 @@
 
 // DFU mode can be accessed by switching BOOT0 DIP ON (towards USB)
 
-#define MICROPY_HW_BOARD_NAME       "Multi_Port_Debug_F407ZE"
-#define MICROPY_HW_MCU_NAME         "STM32F407ZE"
-#define MICROPY_HW_FLASH_FS_LABEL   "F407ZE_FLASH"
+#define MICROPY_HW_BOARD_NAME       "Multi_Port_Debug_F405RG"
+#define MICROPY_HW_MCU_NAME         "STM32F405RG"
+#define MICROPY_HW_FLASH_FS_LABEL   "F405RG_FLASH"
 
 // 1 = use internal flash (1 MByte)
 // 0 = use onboard SPI flash (512 KByte) Winbond W25X40
@@ -36,8 +36,8 @@
 // // #define MICROPY_PY_GENERATOR_PEND_THROW (1)
 // #define MICROPY_PY_MATH             (0)
 #define MICROPY_PY_FRAMEBUF         (0)
-// // #define MICROPY_PY_SOCKET           (0)
-// // #define MICROPY_PY_NETWORK          (0)
+#define MICROPY_PY_SOCKET           (0)
+#define MICROPY_PY_NETWORK          (0)
 // #define MICROPY_PY_ONEWIRE          (0)
 // #define MICROPY_PY_STM              (0)
 // #define MICROPY_PY_PYB_LEGACY       (0)
@@ -46,6 +46,7 @@
 // // #define MICROPY_PY_TIME             (0)
 
 
+#define MICROPY_PY_ONEWIRE   (1)
 
 // #define MICROPY_HW_HAS_SWITCH       (1)
 #define MICROPY_HW_HAS_FLASH        (0)
@@ -80,22 +81,22 @@
 // #define MICROPY_HW_UART_REPL        PYB_UART_1
 // #define MICROPY_HW_UART_REPL_BAUD   115200
 // USART2
-// #define MICROPY_HW_UART2_TX     (pin_A2)  // PA2,PD5
-// #define MICROPY_HW_UART2_RX     (pin_A3)  // PA3,PD6
+#define MICROPY_HW_UART2_TX     (pin_A2)  // PA2,PD5
+#define MICROPY_HW_UART2_RX     (pin_A3)  // PA3,PD6
 // #define MICROPY_HW_UART2_RTS    (pin_A1)  // PA1,PD4
 // #define MICROPY_HW_UART2_CTS    (pin_A0)  // PA0,PD3
 // USART2_CK  PA4,PD7
 
 // USART3
-// #define MICROPY_HW_UART3_TX     (pin_D8)  // PB10,PC10,PD8
-// #define MICROPY_HW_UART3_RX     (pin_D9)  // PB11,PC11,PD9
+#define MICROPY_HW_UART3_TX     (pin_B10)  // PB10,PC10,PD8
+#define MICROPY_HW_UART3_RX     (pin_B11)  // PB11,PC11,PD9
 // #define MICROPY_HW_UART3_RTS    (pin_D12) // PB14,PD12
 // #define MICROPY_HW_UART3_CTS    (pin_D11) // PB13,PD11
 // USART3_CK  PB12,PC12,PD10
 
 // UART4
-#define MICROPY_HW_UART4_TX     (pin_C10)  // PA0,PC10
-#define MICROPY_HW_UART4_RX     (pin_C11)  // PA1,PC11
+#define MICROPY_HW_UART4_TX     (pin_A0)  // PA0,PC10
+#define MICROPY_HW_UART4_RX     (pin_A1)  // PA1,PC11
 
 // UART5
 #define MICROPY_HW_UART5_TX     (pin_C12) // PC12
@@ -109,14 +110,14 @@
 // USART6_CK  PC8,PG7
 
 // I2C buses
-#define MICROPY_HW_I2C1_SCL     (pin_B6)  // PB8,PB6
-#define MICROPY_HW_I2C1_SDA     (pin_B7)  // PB9,PB7
+// #define MICROPY_HW_I2C1_SCL     (pin_B6)  // PB8,PB6
+// #define MICROPY_HW_I2C1_SDA     (pin_B7)  // PB9,PB7
 // // I2C1_SMBA  PB5
 // #define MICROPY_HW_I2C2_SCL     (pin_B10) // PB10,PF1
 // #define MICROPY_HW_I2C2_SDA     (pin_B11) // PB11,PF0
 // // I2C2_SMBA  PB12,PF2
-// #define MICROPY_HW_I2C3_SCL     (pin_A8)  // PA8
-// #define MICROPY_HW_I2C3_SDA     (pin_C9)  // PC9
+#define MICROPY_HW_I2C3_SCL     (pin_A8)  // PA8
+#define MICROPY_HW_I2C3_SDA     (pin_C9)  // PC9
 // I2C3_SMBA  PA9
 
 // AT24C08 EEPROM on I2C1 0x50-0x53
@@ -148,33 +149,33 @@
 #define MICROPY_HW_SPI3_MOSI    (pin_B5)  // PB5,PC12
 
 // CAN buses
-#define MICROPY_HW_CAN1_TX      (pin_B9)  // PB9,PD1,PA12
-#define MICROPY_HW_CAN1_RX      (pin_B8)  // PB8,PD0,PA11
-// #define MICROPY_HW_CAN2_TX      (pin_B13) // PB13,PB6
-// #define MICROPY_HW_CAN2_RX      (pin_B12) // PB12,PB5
+#define MICROPY_HW_CAN1_TX      (pin_A12)  // PB9,PD1,PA12
+#define MICROPY_HW_CAN1_RX      (pin_A11)  // PB8,PD0,PA11
+#define MICROPY_HW_CAN2_TX      (pin_B13) // PB13,PB6
+#define MICROPY_HW_CAN2_RX      (pin_B12) // PB12,PB5
 
 // DAC
 // DAC_OUT1 PA4
 // DAC_OUT2 PA5
 
 // LEDs
-#define MICROPY_HW_LED1         (pin_C8) // blue
-#define MICROPY_HW_LED2         (pin_C9) // blue
+#define MICROPY_HW_LED1         (pin_C15) // blue
+// #define MICROPY_HW_LED2         (pin_C5) // blue
 #define MICROPY_HW_LED_ON(pin)  (mp_hal_pin_low(pin))
 #define MICROPY_HW_LED_OFF(pin) (mp_hal_pin_high(pin))
 
 // If using onboard SPI flash
 #if !MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE
 
-// W25X40 SPI Flash = 4 Mbit (512 KByte)
-#define MICROPY_HW_SPIFLASH_SIZE_BITS (16 * 1024 * 1024)
+// W25X40 SPI Flash = 32 Mbit (4096 KByte)
+#define MICROPY_HW_SPIFLASH_SIZE_BITS (4 * 1024 * 1024)
 #define MICROPY_HW_SPIFLASH_CS      (pin_A4)
 #define MICROPY_HW_SPIFLASH_SCK     (pin_A5)
 #define MICROPY_HW_SPIFLASH_MISO    (pin_A6)
 #define MICROPY_HW_SPIFLASH_MOSI    (pin_B5)
 
-#define MICROPY_BOARD_EARLY_INIT    VCC_GND_F407ZG_board_early_init
-void VCC_GND_F407ZG_board_early_init(void);
+#define MICROPY_BOARD_EARLY_INIT    VCC_GND_F405RG_board_early_init
+void VCC_GND_F405RG_board_early_init(void);
 
 extern const struct _mp_spiflash_config_t spiflash_config;
 extern struct _spi_bdev_t spi_bdev;
@@ -206,28 +207,21 @@ extern struct _spi_bdev_t spi_bdev;
 
 // USB config
 #define MICROPY_HW_USB_FS (1)
-#define MICROPY_HW_ETH_PHY_MII (1)
+// #define MICROPY_HW_ETH_PHY_MII (1)
 // #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 // #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
 
 // Ethernet via RMII
-#define MICROPY_HW_ETH_MDC          (pin_C1)
-#define MICROPY_HW_ETH_MDIO         (pin_A2)
+// #define MICROPY_HW_ETH_MDC          (pin_C1)
+// #define MICROPY_HW_ETH_MDIO         (pin_A2)
 
-
-
-
-
-#define MICROPY_HW_ETH_RMII_REF_CLK (pin_A1)
-#define MICROPY_HW_ETH_RMII_CRS_DV  (pin_A7)
-#define MICROPY_HW_ETH_RMII_RXD0    (pin_C4)
-#define MICROPY_HW_ETH_RMII_RXD1    (pin_C5)
-#define MICROPY_HW_ETH_RMII_TX_EN   (pin_B11)
-#define MICROPY_HW_ETH_RMII_TXD0    (pin_B12)
-#define MICROPY_HW_ETH_RMII_TXD1    (pin_B13)
-
-
-
+// #define MICROPY_HW_ETH_RMII_REF_CLK (pin_A1)
+// #define MICROPY_HW_ETH_RMII_CRS_DV  (pin_A7)
+// #define MICROPY_HW_ETH_RMII_RXD0    (pin_C4)
+// #define MICROPY_HW_ETH_RMII_RXD1    (pin_C5)
+// #define MICROPY_HW_ETH_RMII_TX_EN   (pin_B11)
+// #define MICROPY_HW_ETH_RMII_TXD0    (pin_B12)
+// #define MICROPY_HW_ETH_RMII_TXD1    (pin_B13)
 
 
 // sram
