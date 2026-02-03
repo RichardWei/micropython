@@ -45,11 +45,32 @@
 #define TIMING_WRITE2 (54)
 #define TIMING_WRITE3 (10)
 
-static int onewire_bus_reset(mp_hal_pin_obj_t pin) {
-    mp_hal_pin_od_low(pin);
+static inline void onewire_pin_input_od(mp_hal_pin_obj_t pin) {
+    mp_hal_pin_od_high(pin);
+}
+
+static inline void onewire_pin_output_value(mp_hal_pin_obj_t pin, int value, bool strong_pullup) {
+    if (strong_pullup) {
+        mp_hal_pin_output(pin);
+        if (value) {
+            mp_hal_pin_high(pin);
+        } else {
+            mp_hal_pin_low(pin);
+        }
+    } else {
+        if (value) {
+            mp_hal_pin_od_high(pin);
+        } else {
+            mp_hal_pin_od_low(pin);
+        }
+    }
+}
+
+static int onewire_bus_reset(mp_hal_pin_obj_t pin, bool strong_pullup) {
+    onewire_pin_output_value(pin, 0, strong_pullup);
     mp_hal_delay_us(TIMING_RESET1);
     uint32_t i = mp_hal_quiet_timing_enter();
-    mp_hal_pin_od_high(pin);
+    onewire_pin_input_od(pin);
     mp_hal_delay_us_fast(TIMING_RESET2);
     int status = !mp_hal_pin_read(pin);
     mp_hal_quiet_timing_exit(i);
@@ -58,11 +79,11 @@ static int onewire_bus_reset(mp_hal_pin_obj_t pin) {
 }
 
 static int onewire_bus_readbit(mp_hal_pin_obj_t pin) {
-    mp_hal_pin_od_high(pin);
+    onewire_pin_input_od(pin);
     uint32_t i = mp_hal_quiet_timing_enter();
     mp_hal_pin_od_low(pin);
     mp_hal_delay_us_fast(TIMING_READ1);
-    mp_hal_pin_od_high(pin);
+    onewire_pin_input_od(pin);
     mp_hal_delay_us_fast(TIMING_READ2);
     int value = mp_hal_pin_read(pin);
     mp_hal_quiet_timing_exit(i);
@@ -70,15 +91,15 @@ static int onewire_bus_readbit(mp_hal_pin_obj_t pin) {
     return value;
 }
 
-static void onewire_bus_writebit(mp_hal_pin_obj_t pin, int value) {
+static void onewire_bus_writebit(mp_hal_pin_obj_t pin, int value, bool strong_pullup) {
     uint32_t i = mp_hal_quiet_timing_enter();
-    mp_hal_pin_od_low(pin);
+    onewire_pin_output_value(pin, 0, strong_pullup);
     mp_hal_delay_us_fast(TIMING_WRITE1);
     if (value) {
-        mp_hal_pin_od_high(pin);
+        onewire_pin_output_value(pin, 1, strong_pullup);
     }
     mp_hal_delay_us_fast(TIMING_WRITE2);
-    mp_hal_pin_od_high(pin);
+    onewire_pin_input_od(pin);
     mp_hal_delay_us_fast(TIMING_WRITE3);
     mp_hal_quiet_timing_exit(i);
 }
@@ -86,10 +107,14 @@ static void onewire_bus_writebit(mp_hal_pin_obj_t pin, int value) {
 /******************************************************************************/
 // MicroPython bindings
 
-static mp_obj_t onewire_reset(mp_obj_t pin_in) {
-    return mp_obj_new_bool(onewire_bus_reset(mp_hal_get_pin_obj(pin_in)));
+static mp_obj_t onewire_reset(size_t n_args, const mp_obj_t *args) {
+    bool strong_pullup = false;
+    if (n_args > 1) {
+        strong_pullup = mp_obj_is_true(args[1]);
+    }
+    return mp_obj_new_bool(onewire_bus_reset(mp_hal_get_pin_obj(args[0]), strong_pullup));
 }
-static MP_DEFINE_CONST_FUN_OBJ_1(onewire_reset_obj, onewire_reset);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(onewire_reset_obj, 1, 2, onewire_reset);
 
 static mp_obj_t onewire_readbit(mp_obj_t pin_in) {
     return MP_OBJ_NEW_SMALL_INT(onewire_bus_readbit(mp_hal_get_pin_obj(pin_in)));
@@ -106,22 +131,30 @@ static mp_obj_t onewire_readbyte(mp_obj_t pin_in) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_1(onewire_readbyte_obj, onewire_readbyte);
 
-static mp_obj_t onewire_writebit(mp_obj_t pin_in, mp_obj_t value_in) {
-    onewire_bus_writebit(mp_hal_get_pin_obj(pin_in), mp_obj_get_int(value_in));
+static mp_obj_t onewire_writebit(size_t n_args, const mp_obj_t *args) {
+    bool strong_pullup = false;
+    if (n_args > 2) {
+        strong_pullup = mp_obj_is_true(args[2]);
+    }
+    onewire_bus_writebit(mp_hal_get_pin_obj(args[0]), mp_obj_get_int(args[1]), strong_pullup);
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_2(onewire_writebit_obj, onewire_writebit);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(onewire_writebit_obj, 2, 3, onewire_writebit);
 
-static mp_obj_t onewire_writebyte(mp_obj_t pin_in, mp_obj_t value_in) {
-    mp_hal_pin_obj_t pin = mp_hal_get_pin_obj(pin_in);
-    int value = mp_obj_get_int(value_in);
+static mp_obj_t onewire_writebyte(size_t n_args, const mp_obj_t *args) {
+    mp_hal_pin_obj_t pin = mp_hal_get_pin_obj(args[0]);
+    int value = mp_obj_get_int(args[1]);
+    bool strong_pullup = false;
+    if (n_args > 2) {
+        strong_pullup = mp_obj_is_true(args[2]);
+    }
     for (int i = 0; i < 8; ++i) {
-        onewire_bus_writebit(pin, value & 1);
+        onewire_bus_writebit(pin, value & 1, strong_pullup);
         value >>= 1;
     }
     return mp_const_none;
 }
-static MP_DEFINE_CONST_FUN_OBJ_2(onewire_writebyte_obj, onewire_writebyte);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(onewire_writebyte_obj, 2, 3, onewire_writebyte);
 
 static mp_obj_t onewire_crc8(mp_obj_t data) {
     mp_buffer_info_t bufinfo;
