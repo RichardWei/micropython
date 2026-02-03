@@ -2,7 +2,7 @@
 
 # chmod +x py_env.sh
 
-BOARD=Multi_Port_Debug_F407ZE
+BOARD=Multi_Port_Debug_F405RG
 make -C mpy-cross
 cd ports/stm32
 
@@ -24,7 +24,7 @@ fi
 
 # make BOARD=${BOARD} LTO=1 
 
-make BOARD=${BOARD} LTO=1 -j8
+make BOARD=${BOARD} LTO=1 -j8 2>&1 | tee build_${BOARD}.log
 FIRMWARE_DIR=boards/${BOARD}
 mkdir -p ${FIRMWARE_DIR}
 cp build-${BOARD}/firmware.hex ${FIRMWARE_DIR}
