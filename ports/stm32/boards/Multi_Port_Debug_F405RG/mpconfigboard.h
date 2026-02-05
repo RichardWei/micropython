@@ -63,8 +63,8 @@
 #define MICROPY_HW_CLK_PLLQ (7)             // divide core clock by this to get 48MHz
 
 // The board has a 32kHz crystal for the RTC
-#define MICROPY_HW_RTC_USE_LSE      (1)
-#define MICROPY_HW_RTC_USE_US       (1)
+#define MICROPY_HW_RTC_USE_LSE      (0)
+#define MICROPY_HW_RTC_USE_US       (0)
 // #define MICROPY_HW_RTC_USE_CALOUT   (1)  // turn on/off PC13 512Hz output
 
 // Use Sel from joystick. Joystick is pulled low. Pressing the button makes the input go high.
@@ -168,11 +168,11 @@
 #if !MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE
 
 // W25X40 SPI Flash = 32 Mbit (4096 KByte)
-#define MICROPY_HW_SPIFLASH_SIZE_BITS (4 * 1024 * 1024)
+#define MICROPY_HW_SPIFLASH_SIZE_BITS (32 * 1024 * 1024)
 #define MICROPY_HW_SPIFLASH_CS      (pin_A4)
 #define MICROPY_HW_SPIFLASH_SCK     (pin_A5)
 #define MICROPY_HW_SPIFLASH_MISO    (pin_A6)
-#define MICROPY_HW_SPIFLASH_MOSI    (pin_B5)
+#define MICROPY_HW_SPIFLASH_MOSI    (pin_A7)
 
 #define MICROPY_BOARD_EARLY_INIT    VCC_GND_F405RG_board_early_init
 void VCC_GND_F405RG_board_early_init(void);
@@ -206,7 +206,10 @@ extern struct _spi_bdev_t spi_bdev;
 // 10 SW1 - PF10
 
 // USB config
-#define MICROPY_HW_USB_FS (1)
+// #define MICROPY_HW_USB_FS (1)
+
+#define MICROPY_HW_USB_HS           (1)
+#define MICROPY_HW_USB_HS_IN_FS     (1)
 // #define MICROPY_HW_ETH_PHY_MII (1)
 // #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
 // #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
