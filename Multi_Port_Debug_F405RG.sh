@@ -2,6 +2,14 @@
 
 # chmod +x py_env.sh
 
+
+cd /workspaces/micropython/lib/micropython-lib
+
+git reset --hard
+
+git apply /workspaces/micropython/ports/stm32/boards/Multi_Port_Debug_F405RG/micropython-lib-fix.patch
+
+cd /workspaces/micropython
 BOARD=Multi_Port_Debug_F405RG
 make -C mpy-cross
 cd ports/stm32
@@ -23,7 +31,6 @@ fi
 
 
 # make BOARD=${BOARD} LTO=1 
-
 make BOARD=${BOARD} LTO=1 -j8 2>&1 | tee build_${BOARD}.log
 FIRMWARE_DIR=boards/${BOARD}
 mkdir -p ${FIRMWARE_DIR}
