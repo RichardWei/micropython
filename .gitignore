@@ -37,3 +37,4 @@ user.props
 # Firmware files
 *.hex
 sle_sdk/
+*.log
