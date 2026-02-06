@@ -34,6 +34,7 @@ SRC_EXTMOD_C += \
 	extmod/modmarshal.c \
 	extmod/modnetwork.c \
 	extmod/modonewire.c \
+	extmod/modswi.c \
 	extmod/modopenamp.c \
 	extmod/modopenamp_remoteproc.c \
 	extmod/modopenamp_remoteproc_store.c \

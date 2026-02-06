@@ -2151,6 +2151,11 @@ typedef time_t mp_timestamp_t;
 #define MICROPY_PY_ONEWIRE (0)
 #endif
 
+// Whether to provide the low-level "_swi" module
+#ifndef MICROPY_PY_SWI
+#define MICROPY_PY_SWI (0)
+#endif
+
 // Whether to provide the "platform" module
 #ifndef MICROPY_PY_PLATFORM
 #define MICROPY_PY_PLATFORM (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_EXTRA_FEATURES)

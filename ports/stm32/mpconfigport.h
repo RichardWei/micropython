@@ -169,6 +169,14 @@
 #define MICROPY_PY_ONEWIRE          (1)
 #endif
 
+#ifndef MICROPY_PY_SWI
+#define MICROPY_PY_SWI              (1)
+#endif
+
+#ifndef MICROPY_SWI_TRAINING_CHECK
+#define MICROPY_SWI_TRAINING_CHECK  (1)
+#endif
+
 // optional network features
 #if MICROPY_PY_NETWORK
 #ifndef MICROPY_PY_SOCKET
