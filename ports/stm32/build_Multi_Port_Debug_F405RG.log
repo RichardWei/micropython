@@ -42,27 +42,27 @@ mkdir -p build-Multi_Port_Debug_F405RG/usbdev/core/src/
 GEN build-Multi_Port_Debug_F405RG/genhdr/pins.h
 GEN build-Multi_Port_Debug_F405RG/genhdr/pybcdc.inf
 GEN stmconst build-Multi_Port_Debug_F405RG/genhdr/modstm_const.h
-GEN build-Multi_Port_Debug_F405RG/genhdr/pybcdc_inf.h
 GEN build-Multi_Port_Debug_F405RG/genhdr/mpversion.h
+GEN build-Multi_Port_Debug_F405RG/genhdr/pybcdc_inf.h
 GEN build-Multi_Port_Debug_F405RG/genhdr/qstr.i.last
 GEN build-Multi_Port_Debug_F405RG/genhdr/qstr.split
-GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.split
 GEN build-Multi_Port_Debug_F405RG/genhdr/moduledefs.split
+GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.split
 GEN build-Multi_Port_Debug_F405RG/genhdr/compressed.split
 GEN build-Multi_Port_Debug_F405RG/genhdr/plli2stable.h
 GEN build-Multi_Port_Debug_F405RG/genhdr/pllfreqtable.h
-GEN build-Multi_Port_Debug_F405RG/genhdr/compressed.collected
-Compressed data updated
-GEN build-Multi_Port_Debug_F405RG/genhdr/compressed.data.h
-GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.collected
-Root pointer registrations updated
-GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.h
-GEN build-Multi_Port_Debug_F405RG/genhdr/moduledefs.collected
-Module registrations updated
-GEN build-Multi_Port_Debug_F405RG/genhdr/moduledefs.h
 GEN build-Multi_Port_Debug_F405RG/genhdr/qstrdefs.collected.h
+GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.collected
+GEN build-Multi_Port_Debug_F405RG/genhdr/moduledefs.collected
+GEN build-Multi_Port_Debug_F405RG/genhdr/compressed.collected
+Root pointer registrations updated
+Module registrations updated
 QSTR updated
+GEN build-Multi_Port_Debug_F405RG/genhdr/root_pointers.h
+GEN build-Multi_Port_Debug_F405RG/genhdr/moduledefs.h
+Compressed data updated
 GEN build-Multi_Port_Debug_F405RG/genhdr/qstrdefs.generated.h
+GEN build-Multi_Port_Debug_F405RG/genhdr/compressed.data.h
 AS ../../lib/stm32lib/CMSIS/STM32F4xx/Source/Templates/gcc/startup_stm32f407xx.s
 CC ../../lib/stm32lib/CMSIS/STM32F4xx/Source/Templates/system_stm32f4xx.c
 CC system_stm32.c
@@ -205,8 +205,6 @@ CC ../../extmod/machine_i2s.c
 CC ../../extmod/machine_mem.c
 CC ../../extmod/machine_pinbase.c
 CC ../../extmod/machine_pulse.c
-CC ../../extmod/machine_pwm.c
-CC ../../extmod/machine_signal.c
 MPY asyncio/__init__.py
 MPY asyncio/core.py
 MPY asyncio/event.py
@@ -216,7 +214,10 @@ MPY asyncio/stream.py
 MPY uasyncio.py
 MPY dht.py
 MPY onewire.py
+MPY swi.py
 GEN build-Multi_Port_Debug_F405RG/frozen_content.c
+CC ../../extmod/machine_pwm.c
+CC ../../extmod/machine_signal.c
 CC ../../extmod/machine_spi.c
 CC ../../extmod/machine_timer.c
 CC ../../extmod/machine_uart.c
@@ -237,6 +238,7 @@ CC ../../extmod/modmachine.c
 CC ../../extmod/modmarshal.c
 CC ../../extmod/modnetwork.c
 CC ../../extmod/modonewire.c
+CC ../../extmod/modswi.c
 CC ../../extmod/modopenamp.c
 CC ../../extmod/modopenamp_remoteproc.c
 CC ../../extmod/modopenamp_remoteproc_store.c
@@ -474,7 +476,7 @@ CC build-Multi_Port_Debug_F405RG/pins_Multi_Port_Debug_F405RG.c
 CC build-Multi_Port_Debug_F405RG/frozen_content.c
 LINK build-Multi_Port_Debug_F405RG/firmware.elf
    text	   data	    bss	    dec	    hex	filename
- 310128	     20	  30604	 340752	  53310	build-Multi_Port_Debug_F405RG/firmware.elf
+ 315800	     56	  30608	 346464	  54960	build-Multi_Port_Debug_F405RG/firmware.elf
 GEN build-Multi_Port_Debug_F405RG/firmware0.bin
 GEN build-Multi_Port_Debug_F405RG/firmware1.bin
 GEN build-Multi_Port_Debug_F405RG/firmware.hex
