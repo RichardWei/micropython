@@ -1,5 +1,5 @@
 diff --git a/micropython/drivers/bus/onewire/onewire.py b/micropython/drivers/bus/onewire/onewire.py
-index 4c6da741c74cea7448ab9579625b42ab5d9028f5..3f9eabd640624d6c3fb6f303592afad5494a3721 100644
+index 4c6da74..3f9eabd 100644
 --- a/micropython/drivers/bus/onewire/onewire.py
 +++ b/micropython/drivers/bus/onewire/onewire.py
 @@ -13,12 +13,18 @@ class OneWire:
@@ -42,3 +42,121 @@ index 4c6da741c74cea7448ab9579625b42ab5d9028f5..3f9eabd640624d6c3fb6f303592afad5
  
      def write(self, buf):
          for b in buf:
+diff --git a/micropython/drivers/bus/swi/manifest.py b/micropython/drivers/bus/swi/manifest.py
+new file mode 100644
+index 0000000..8858599
+--- /dev/null
++++ b/micropython/drivers/bus/swi/manifest.py
+@@ -0,0 +1,3 @@
++metadata(description="SWI driver for SLE_SWI", version="0.1.0")
++
++module("swi.py", opt=3)
+diff --git a/micropython/drivers/bus/swi/swi.py b/micropython/drivers/bus/swi/swi.py
+new file mode 100644
+index 0000000..f2ea4e3
+--- /dev/null
++++ b/micropython/drivers/bus/swi/swi.py
+@@ -0,0 +1,102 @@
++# SWI driver for SLE956681 (thin wrapper around _swi)
++# MIT license; Copyright (c) 2026
++
++import _swi as _swi
++
++class SWI:
++    def __init__(self, pin, strong_pullup=False):
++        self.pin = pin
++        # Ensure pin is in Open-Drain/Input mode initially
++        self.pin.init(pin.OPEN_DRAIN, pin.PULL_UP)
++        self.strong_pullup = bool(strong_pullup)
++
++    def set_timing(self, tau1_us, tau3_us, tau5_us, timeout_us):
++        return _swi.set_timing(self.pin, tau1_us, tau3_us, tau5_us, timeout_us)
++
++    def set_wakeup_timing(self, wake_delay_us, wake_low_us, wake_filter_us, reset_delay_us):
++        return _swi.set_wakeup_timing(
++            self.pin, wake_delay_us, wake_low_us, wake_filter_us, reset_delay_us
++        )
++
++    def set_power_timing(self, powerdown_us, powerup_us):
++        return _swi.set_power_timing(self.pin, powerdown_us, powerup_us)
++
++    def stop(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.stop(self.pin, strong_pullup)
++
++    def wakeup(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.wakeup(self.pin, strong_pullup)
++
++    def reset_delay(self):
++        return _swi.reset_delay()
++
++    def powerdown(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.powerdown(self.pin, strong_pullup)
++
++    def powerup(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.powerup(self.pin, strong_pullup)
++
++    def powercycle(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.powercycle(self.pin, strong_pullup)
++
++    def send_raw_word(self, raw17, wait_irq=False, immediate_irq=False, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_raw_word(self.pin, raw17, wait_irq, immediate_irq, strong_pullup)
++
++    def recv_raw_word(self):
++        return _swi.recv_raw_word(self.pin)
++
++    def send_raw_word_no_irq(self, code, data, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_raw_word_no_irq(self.pin, code, data, strong_pullup)
++
++    def send_wd(self, data, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_wd(self.pin, data, strong_pullup)
++
++    def send_era(self, addr_hi, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_era(self.pin, addr_hi, strong_pullup)
++
++    def send_rra(self, addr_lo, length, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_rra(self.pin, addr_lo, length, strong_pullup)
++
++    def send_bres(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_bres(self.pin, strong_pullup)
++
++    def send_pdwn(self, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_pdwn(self.pin, strong_pullup)
++
++    def send_rbl(self, n, strong_pullup=None):
++        if strong_pullup is None:
++            strong_pullup = self.strong_pullup
++        return _swi.send_rbl(self.pin, n, strong_pullup)
++
++    def compute_parity(self, cmd16):
++        return _swi.compute_parity(cmd16)
++
++    def add_invert_flag(self, cmd16_with_parity):
++        return _swi.add_invert_flag(cmd16_with_parity)
++
++    def crc16(self, data):
++        return _swi.crc16(data)
+\ No newline at end of file
