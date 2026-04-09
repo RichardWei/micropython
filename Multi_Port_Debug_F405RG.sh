@@ -4,7 +4,7 @@
 
 
 cd /workspaces/micropython/lib/micropython-lib
-
+git submodule update --init --recursive
 git reset --hard
 git clean -fd
 git apply /workspaces/micropython/ports/stm32/boards/Multi_Port_Debug_F405RG/micropython-lib-fix.patch
